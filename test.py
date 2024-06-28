@@ -1,8 +1,19 @@
 import os
+import json
+import requests
 
-# current_directory = os.chdir('C:\Users\pirat\OneDrive\Рабочий стол\SyncFolder')
-# name = input('Укажите имя папки: ')
-# os.rename('SyncFolder', 'MagicFolder')
+url = 'https://cloud-api.yandex.net/v1/disk/resources'
+headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': 'OAuth y0_AgAAAABxcWZdAADLWwAAAAEIzoS5AAAEeJnGQWhA9IaoyQLGIrWboGrzqQ'
+}
 
-directory, filename = os.path.split(r'C:\Users\pirat\OneDrive\Рабочий стол\SyncFolder')
-print(directory, filename)
+params = {
+    'path': 'disk:/Applications/Yandex Polygon/SyncFolder/',
+    'fields': 'name, _embedded.items.path,_embedded.items.name, _embedded.items.type'
+}
+
+response = requests.get(url, headers=headers, params=params)
+print(response.status_code)
+print(json.dumps(response.json(), indent=4))
