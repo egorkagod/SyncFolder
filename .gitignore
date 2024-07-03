@@ -107,3 +107,6 @@ venv.bak/
 
 # Pyre type checker
 .pyre/
+
+# IDE
+.idea
